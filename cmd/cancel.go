@@ -27,10 +27,7 @@ var cancelCmd = &cobra.Command{
 	Long: `	-tTitle the title of the meeting`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO: Work your own magic here
-		title, err := cmd.Flags().GetString("title")
-		if err != nil {
-			fmt.Println(err.Error())
-		}
+		title, _ := cmd.Flags().GetString("title")
 		fmt.Println("cancel meeting: " + title)
 	},
 }
