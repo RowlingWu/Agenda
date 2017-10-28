@@ -20,29 +20,33 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// quitCmd represents the quit command
-var quitCmd = &cobra.Command{
-	Use:   "quit",
-	Short: "quit the meeting that you attend",
-	Long: `-tTitle the title of the meeting`,
+// quCmd represents the qu command
+var quCmd = &cobra.Command{
+	Use:   "qu",
+	Short: "A brief description of your command",
+	Long: `A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO: Work your own magic here
-		title, _ := cmd.Flags().GetString("title")
-		fmt.Println("quit meeting: " + title)
+		fmt.Println("qu called")
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(quitCmd)
-	quitCmd.Flags().StringP("title", "t", "", "the title of the meeting")
+	RootCmd.AddCommand(quCmd)
+
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// quitCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// quCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// quitCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// quCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 }
