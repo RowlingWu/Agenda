@@ -18,8 +18,6 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/RowlingWu/agenda/entity"
 	"log"
-	"os"
-	"encoding/json"
 )
 
 // delCmd represents the del command
@@ -28,25 +26,6 @@ var delCmd = &cobra.Command{
 	Short: "delete current user",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		users := [6]entity.User{
-			{"rowling", "a", "@", "13"},
-			{"bob", "b", "#", "4"},
-			{"alice", "a", "e", "5"},
-			{"faith", "f", "a", "1"},
-			{"john", "j", "e", "e"},
-			{"mary", "m", "$", "4"},
-		}
-		f, err := os.OpenFile("entity/userInfo.txt", os.O_WRONLY|os.O_CREATE, 0666)
-		if err != nil {
-			log.Fatal(err.Error())
-		}
-		for _, u := range users {
-			b, _ := json.Marshal(u)
-			f.WriteString(string(b) + "\n")
-		}
-		f.Close()
-
-
 		// TODO: Work your own magic here
 		// read username from curUser.txt
 		log.Println("read info of the current user...")
