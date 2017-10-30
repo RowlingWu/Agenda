@@ -16,28 +16,30 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/RowlingWu/agenda/entity"
 )
 
 // loginCmd represents the login command
 var loginCmd = &cobra.Command{
 	Use:   "login",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Log in to the system using a identity",
+	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: Work your own magic here
-		fmt.Println("login called")
+		username, _ := cmd.Flags().GetString("user")
+		password, _ := cmd.Flags().GetString("password")
+		sta := entity.Login(username,password)
+		if sta {
+			fmt.Println("login successed")
+		}
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(loginCmd)
+	loginCmd.Flags().StringP("user", "u", "Anonymous", "Help message for username")
+	loginCmd.Flags().StringP("password", "p", "Anonymous", "Help message for password")
+        
 
 	// Here you will define your flags and configuration settings.
 
