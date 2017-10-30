@@ -15,7 +15,7 @@
 package cmd
 
 import (
-	"fmt"
+	"log"
 	"github.com/spf13/cobra"
 	"github.com/RowlingWu/agenda/entity"
 )
@@ -30,7 +30,7 @@ var loginCmd = &cobra.Command{
 		password, _ := cmd.Flags().GetString("password")
 		sta := entity.Login(username,password)
 		if sta {
-			fmt.Println("login successed")
+			log.Println("login successed")
 		}
 	},
 }
