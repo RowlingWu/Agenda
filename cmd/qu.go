@@ -16,29 +16,31 @@ package cmd
 
 import (
 	"fmt"
-
+	"agenda/entity"
 	"github.com/spf13/cobra"
 )
 
 // quCmd represents the qu command
 var quCmd = &cobra.Command{
 	Use:   "qu",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "to find user infomation ",
+	Long: `All user's information.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: Work your own magic here
-		fmt.Println("qu called")
+		                                                                                                                                                                                                            
+		nuser := entity.GetAllUsers();
+		for _,i:= range nuser {
+				fmt.Println("----------------")
+					fmt.Println("Username: ", i.Name)
+					fmt.Println("Telephone number: ", i.Tel)
+					fmt.Println("Email: ", i.Email)
+					fmt.Println("----------------")
+				}
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(quCmd)
-
+	quCmd.Flags().StringP("userinfo", "q", "", "user info display")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
@@ -48,5 +50,4 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// quCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
 }
