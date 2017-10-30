@@ -3,9 +3,8 @@ import (
   "os"
   "io"
   "encoding/json"
-  "log"
+ "log"
 )
-var userPath = "entity/userInfo.json"
 
 var dirty bool
 
@@ -16,7 +15,7 @@ func init() {
   MyRead();
 }
 func MyRead() error {
-   file, err := os.Open(userPath);
+   file, err := os.Open("entity/userInfo.json");
    if err != nil {
      log.Fatal(err.Error())
      return err
@@ -28,12 +27,12 @@ func MyRead() error {
    case nil, io.EOF:
      return nil
    default:
-     log.Fatal("Decode userinfo file failed:", err)
+    log.Fatal("Decode userinfo file failed:", err)
      return err
    }
 }
 func MyWrite() error {
-  file,err := os.Create("userPath");
+  file,err := os.Create("entity/userInfo.json");
   if err != nil {
     return err
   }
@@ -65,7 +64,7 @@ func MyUsrQuery(u string) (bool) {
 func MyRegister(u string, pw string, em string, ph string) (bool,error) {
     flag := MyUsrQuery(u)
    if flag == false {
-     log.Fatal("This username has been registered already, please choose annother one")
+    log.Fatal("This username has been registered already, please choose annother one")
      return false, nil
    }
    MyCreate(&User{u,pw,em,ph})

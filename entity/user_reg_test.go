@@ -12,7 +12,6 @@ var users = []User{
 }
 
 func init() {
-	userPath = "u.test"
 	userList = nil
 }
 
