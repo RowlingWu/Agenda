@@ -29,13 +29,21 @@ var delCmd = &cobra.Command{
 		// TODO: Work your own magic here
 		// read username from curUser.txt
 		log.Println("read info of the current user...")
-		name := entity.ReadCur()
+		name, ok := entity.ReadCur()
+		if ok == 1 {
+			log.Fatal("fatal: please log in first")
+		}
+		if ok == 2 {
+			log.Fatal("failed to delete current user")
+		}
 
 		// clear curUser.txt
 		log.Println("delete current user...")
-		entity.ClearCurUsr()
 		// seek userInfo in userInfo.txt and delete it
-		entity.SeekUsr(name)
+		f := entity.SeekUsr(name)
+		if !f {
+			log.Fatal("failed to delete current user")
+		}
 		log.Println("success in deleting current user")
 	},
 }

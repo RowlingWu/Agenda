@@ -1,49 +1,47 @@
 package entity
 
 import (
-    "log"
     "os"
     "bufio"
     "encoding/json"
 )
 
-func ReadCur() string {
+func ReadCur() (string, int) {  // 0:成功. 1:需要登录. 2:失败
     var name string
     var cur *os.File
     var err error
     if cur, err = os.Open("entity/curUser.txt"); err != nil {
-        log.Fatal("failed to read info of the current user")
+        return string(""), 2
     }
     line := bufio.NewScanner(cur)
     line.Scan()
     name = line.Text()
     cur.Close()
     if (len(name) == 0) {
-        log.Fatal("fatal: Please login first")
+        return string(""), 1
     }
-    return name
-}
 
-func ClearCurUsr() {
-    cur, err := os.Create("entity/curUser.txt")
+    cur, err = os.Create("entity/curUser.txt")
     if err == nil {
         cur.Close()
     } else {
-        log.Fatal("failed to delete current user")
+        return string(""), 2
     }
+
+    return name, 0
 }
 
-func SeekUsr(name string) {
-    file, err := os.Open("entity/userInfo.txt")
+func SeekUsr(name string) bool {
+    file, err := os.Open("entity/userInfo.json")
     if err != nil {
-        log.Fatal("failed to delete current user")
+        return false
     }
 
     // begin searching
     // ftemp copies userInfo.txt, deletes curUser and is renamed as userInfo.txt
-    ftemp, err := os.OpenFile("entity/temp.txt", os.O_WRONLY|os.O_CREATE, 0666)
+    ftemp, err := os.OpenFile("entity/temp.json", os.O_WRONLY|os.O_CREATE, 0666)
     if err != nil {
-        log.Fatal(err.Error())
+        return false
     }
     line := bufio.NewScanner(file)
     var user User
@@ -56,10 +54,11 @@ func SeekUsr(name string) {
     }
     file.Close()
     ftemp.Close()
-    if err = os.Remove("entity/userInfo.txt"); err != nil {
-        log.Fatal("failed to delete current user")
+    if err = os.Remove("entity/userInfo.json"); err != nil {
+        return false
     }
-    if err = os.Rename("entity/temp.txt", "entity/userInfo.txt"); err != nil {
-        log.Fatal("failed to delete current user")
+    if err = os.Rename("entity/temp.json", "entity/userInfo.json"); err != nil {
+        return false
     }
+    return true
 }
