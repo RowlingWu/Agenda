@@ -9,7 +9,7 @@ import (
 var name string
 
 func TestReadCur_succs(t *testing.T) {
-    f, _ := os.OpenFile("entity/curUser.txt", os.O_WRONLY, 0666)
+    f, _ := os.OpenFile(curUser, os.O_WRONLY, 0666)
     f.WriteString("bob")
     f.Close()
 
@@ -18,7 +18,7 @@ func TestReadCur_succs(t *testing.T) {
         {"bob","b","#","4"},
         {"alice","a","e","5"},
     }
-    f, _ = os.OpenFile("entity/userInfo.txt", os.O_WRONLY, 0666)
+    f, _ = os.OpenFile(userInfo, os.O_WRONLY, 0666)
     for _, u := range users {
         b, _ := json.Marshal(u)
         f.WriteString(string(b) + "\n")
@@ -29,7 +29,7 @@ func TestReadCur_succs(t *testing.T) {
     if name, flag = ReadCur(); flag == 0 {
         t.Log("read and clear current user info success")
     } else {
-        t.Fatal("failed to read or clear current user info")
+        t.Fatal(name + "del fail ")
     }
 }
 
@@ -44,8 +44,8 @@ func TestSeekUsr(t *testing.T) {
 
 func TestReadCur_fail(t *testing.T) {
     if _, f := ReadCur(); f == 1 {
-        t.Fatal("fatal: please log in first")
+        t.Log("please log in first")
     } else {
-        t.Log(f)
+        t.Fatal(f)
     }
 }

@@ -28,12 +28,3 @@ func TestMyCreate(t *testing.T) {
 		t.Log("check for MyCreate pass\n")
 	}
 }
-
-func TestMyRead(t *testing.T) {
-	err := MyRead()
-	if err != nil {
-		t.Log("check for MyRead pass\n")
-	} else {
-		t.Error("check for MyRead fail\n")
-	}
-}
