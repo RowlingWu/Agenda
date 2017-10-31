@@ -33,7 +33,7 @@ func Login(username string, password string) bool {
     }
 
     var user User
-    dat, err := os.Open("entity/userInfo.txt")
+    dat, err := os.Open("entity/userInfo.json")
     check(err)
     line := bufio.NewScanner(dat)
     for line.Scan() {
