@@ -1,7 +1,7 @@
 package entity
 
 import (
-    "log"
+    //"log"
     "os"
     "bufio"
     "encoding/json"
@@ -28,7 +28,7 @@ func Login(username string, password string) bool {
     line2.Scan()
     if len(line2.Text()) != 0 {
         dat2.Close()
-        log.Fatal("login failed. Already logged in")
+        //log.Fatal("login failed. Already logged in")
         return false
     }
 
@@ -50,12 +50,12 @@ func Login(username string, password string) bool {
         }
     }
     dat.Close()
-    log.Fatal("login failed. The username or password incorrect")
+    //log.Fatal("login failed. The username or password incorrect")
     return false
 }
 
 func check(e error) {
     if e != nil {
-        log.Fatal(e)
+        //log.Fatal(e)
     }
 }
