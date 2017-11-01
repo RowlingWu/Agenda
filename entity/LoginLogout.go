@@ -1,7 +1,7 @@
 package entity
 
 import (
-    "log"
+    //"log"
     "os"
     "bufio"
     "encoding/json"
@@ -17,11 +17,11 @@ func Logout() bool {
         return false
     }
     dat.Close()
-    os.Create("entity/curUser.txt")
+    os.Create(CurUser)
     return true
 }
 
-func Login(username string, password string) bool {
+func Login(username string, password string) int {
     dat2, err2 := os.Open(CurUser)
     check(err2)
     line2 := bufio.NewScanner(dat2)
@@ -29,7 +29,7 @@ func Login(username string, password string) bool {
     if len(line2.Text()) != 0 {
         dat2.Close()
         //log.Fatal("login failed. Already logged in")
-        return false
+        return 1
     }
 
     var user User
@@ -46,12 +46,12 @@ func Login(username string, password string) bool {
             dat.WriteString(username)
             dat.Close()
 
-            return true
+            return 0
         }
     }
     dat.Close()
     //log.Fatal("login failed. The username or password incorrect")
-    return false
+    return 2
 }
 
 func check(e error) {

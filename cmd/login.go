@@ -29,8 +29,12 @@ var loginCmd = &cobra.Command{
 		username, _ := cmd.Flags().GetString("user")
 		password, _ := cmd.Flags().GetString("password")
 		sta := entity.Login(username,password)
-		if sta {
+		if sta == 0 {
 			log.Println("login successed")
+		} else if sta == 1 {
+        		log.Fatal("login failed. Already logged in")
+		} else {
+			log.Fatal("login failed. The username or password incorrect")
 		}
 	},
 }
