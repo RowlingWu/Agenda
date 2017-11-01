@@ -8,7 +8,7 @@ import (
 
 )
 
-var userPath string = "entity/userInfo.json"
+//var UserInfo string = "entity/UserInfo.json"
 var dirty bool
 
 var userList []User
@@ -18,7 +18,7 @@ func init() {
   MyRead();
 }
 /*func MyRead() error {
-   file, err := os.Open("entity/userInfo.json");
+   file, err := os.Open("entity/UserInfo.json");
    if err != nil {
      log.Fatal(err.Error() + "reg")
      return err
@@ -30,12 +30,12 @@ func init() {
    case nil, io.EOF:
      return nil
    default:
-    log.Fatal("Decode userinfo file failed:", err)
+    log.Fatal("Decode UserInfo file failed:", err)
      return err
    }
 }*/
 /*func MyWrite() error {
-  file,err := os.Create("entity/userInfo.json");
+  file,err := os.Create("entity/UserInfo.json");
   if err != nil {
     return err
   }
@@ -48,7 +48,7 @@ func init() {
   return nil
 }*/
 func MyRead() error {
-  file, err := os.Open(userPath);
+  file, err := os.Open(UserInfo);
   if err != nil {
     //log.Fatal(err.Error() + "reg")
     return err
@@ -72,7 +72,7 @@ func MyRead() error {
    return err
 }
 func MyWrite() error {
-  file,err := os.Create(userPath);
+  file,err := os.Create(UserInfo);
   if err != nil {
     return err
   }
