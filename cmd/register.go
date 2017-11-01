@@ -15,7 +15,7 @@
 package cmd
 
 import (
-	"fmt"
+	"log"
 	"github.com/RowlingWu/agenda/entity"
 	"github.com/spf13/cobra"
 )
@@ -32,12 +32,12 @@ var registerCmd = &cobra.Command{
 		phone, _ := cmd.Flags().GetString("phone")
 		pass, err := entity.MyRegister(name, pw, em, phone)
 		if pass ==false {
-			fmt.Println("username has been registered, please choose another one")
+			log.Fatal("username has been registered, please choose another one")
 		} else {
 			if err != nil {
-				fmt.Println("some unexpected errors occur")
+				log.Fatal("some unexpected errors occur")
 			} else {
-				fmt.Println("retister successfully")
+				log.Fatal("register successfully")
 			}
 		}
 	},

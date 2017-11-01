@@ -83,6 +83,7 @@ func MyWrite() error {
         //log.Fatal("encoding failed")
       } else {
         file.Write(js)
+file.WriteString("\r\n")
       }
   }
   return err
