@@ -9,7 +9,7 @@ import (
 var name string
 
 func TestReadCur_succs(t *testing.T) {
-    f, _ := os.OpenFile(curUser, os.O_WRONLY, 0666)
+    f, _ := os.OpenFile(CurUser, os.O_WRONLY, 0666)
     f.WriteString("bob")
     f.Close()
 
@@ -18,7 +18,7 @@ func TestReadCur_succs(t *testing.T) {
         {"bob","b","#","4"},
         {"alice","a","e","5"},
     }
-    f, _ = os.OpenFile(userInfo, os.O_WRONLY, 0666)
+    f, _ = os.OpenFile(UserInfo, os.O_WRONLY, 0666)
     for _, u := range users {
         b, _ := json.Marshal(u)
         f.WriteString(string(b) + "\n")
