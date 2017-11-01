@@ -1,6 +1,4 @@
-![build status](https://www.travis-ci.org/RowlingWu/agenda.svg?branch=master 
-
-)
+![build status](https://www.travis-ci.org/RowlingWu/agenda.svg?branch=master )
 # 使用说明
 
 ## 安装
