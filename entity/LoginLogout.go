@@ -1,14 +1,14 @@
 package entity
 
 import (
-    //"log"
+    "log"
     "os"
     "bufio"
     "encoding/json"
 )
 
 func Logout() bool {
-    dat, err := os.Open("entity/curUser.txt")
+    dat, err := os.Open(CurUser)
     check(err)
     line := bufio.NewScanner(dat)
     line.Scan()
@@ -22,7 +22,7 @@ func Logout() bool {
 }
 
 func Login(username string, password string) bool {
-    dat2, err2 := os.Open("entity/curUser.txt")
+    dat2, err2 := os.Open(CurUser)
     check(err2)
     line2 := bufio.NewScanner(dat2)
     line2.Scan()
@@ -33,7 +33,7 @@ func Login(username string, password string) bool {
     }
 
     var user User
-    dat, err := os.Open("entity/userInfo.json")
+    dat, err := os.Open(UserInfo)
     check(err)
     line := bufio.NewScanner(dat)
     for line.Scan() {
@@ -41,7 +41,7 @@ func Login(username string, password string) bool {
         if user.Name == username && user.Passwd == password {
     	    dat.Close()
 
-            dat, err := os.OpenFile("entity/curUser.txt", os.O_WRONLY|os.O_CREATE, 0666)
+            dat, err := os.OpenFile(CurUser, os.O_WRONLY|os.O_CREATE, 0666)
             check(err)
             dat.WriteString(username)
             dat.Close()
@@ -56,6 +56,6 @@ func Login(username string, password string) bool {
 
 func check(e error) {
     if e != nil {
-        //log.Fatal(e)
+        os.Create("entity/curUser.txt")
     }
 }
